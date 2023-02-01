@@ -1,0 +1,11 @@
+.search {
+  &__label {
+    margin-right: 10px;
+  }
+  &__input {
+    padding: 15px;
+    width: 250px;
+    border-radius: 6px;
+    border: 1px solid var(--clr-border-light);
+  }
+}

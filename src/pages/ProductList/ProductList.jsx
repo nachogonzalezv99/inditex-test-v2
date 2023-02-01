@@ -1,26 +1,37 @@
-import { useEffect, useState } from "react"
-import ProductCard from "./ProductCard";
+import { Search } from "../../components/Search/Search";
+import { useSearch } from "../../components/Search/useSearch";
+import { ProductMother } from "../../test/ProductMother";
+import { ProductCard } from "./ProductCard";
+import { ProductCardsSkeleton } from "./ProductCardsSkeleton";
+import styles from './ProductList.module.scss';
+import { useProducts } from "./useProducts";
 
 export function ProductList({ productRepository }) {
-    const [products, setProducts] = useState([]);
-    const [isLoading, setIsLoading] = useState(true)
 
-    useEffect(() => {
-        setIsLoading(true)
-        productRepository.search().then(products => {
-            console.log(products)
-            setProducts(products)
-            setIsLoading(false)
-        })
-    }, [])
+    const { filter, onFilterChange } = useSearch()
+    const { products, isLoading } = useProducts(productRepository, filter)
+
+    let content
+    if (isLoading) {
+        content = <ProductCardsSkeleton numOfWidgets={3} />
+    } else if (products.length === 0) {
+        content = <div>No products available</div>
+    } else {
+        content = products.map((product) => (
+            <ProductCard key={product.id} product={product} />
+        ))
+    }
 
     return (
         <div>
-            <h1>All Products</h1>
-            <div>
-                {products.map(product => (
-                    <ProductCard key={product.id} product={product} />
-                ))}
+            <div className={`${styles.productList} container section`}>
+                <header className={styles.productList__header}>
+                    <h2 className={styles.productList__title}>All Products</h2>
+                    <Search filter={filter} onFilterChange={onFilterChange} />
+                </header>
+                <div className={styles.products}>
+                    {content}
+                </div>
             </div>
         </div>
     )

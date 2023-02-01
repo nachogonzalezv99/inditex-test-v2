@@ -1,0 +1,22 @@
+.productList {
+  &__header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 30px;
+  }
+
+  @media only screen and (max-width: 660px) {
+    &__header {
+      flex-direction: column;
+    }
+    &__title {
+      margin-bottom: 20px;
+    }
+  }
+}
+
+.products {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(16rem, 1fr));
+  gap: 1rem;
+}

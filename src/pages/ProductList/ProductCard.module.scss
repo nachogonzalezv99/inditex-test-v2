@@ -1,0 +1,22 @@
+.product {
+  background-color: var(--white);
+  border-radius: 6px;
+  overflow: hidden;
+  border: 1px solid var(--clr-border-light);
+  cursor: pointer;
+  transition: ease 0.3s border-color;
+  &__img {
+    height: 250px;
+    width: 100%;
+    object-fit: cover;
+  }
+  &__info {
+    padding: 1em;
+  }
+  &__price {
+    text-align: right;
+  }
+  &:hover {
+    border-color: var(--primary-500);
+  }
+}
