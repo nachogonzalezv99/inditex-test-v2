@@ -1,12 +1,12 @@
 import { ApiProductRepository } from "../../infrastructure/ApiProductRepository";
-import { ProductList } from "./ProductList";
+import { ProductDetail } from "../ProductDetail/ProductDetail"
 
 const productRepository = new ApiProductRepository();
 
-export class ProductListFactory {
+export class ProductDetailFactory {
     static create() {
         return (
-            <ProductList
+            <ProductDetail
                 productRepository={productRepository}
             />
         );

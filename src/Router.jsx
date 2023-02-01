@@ -1,6 +1,6 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { Layout } from "./components/layout/Layout";
-import { ProductDetail } from "./pages/ProductDetail/ProductDetail";
+import { ProductDetailFactory } from "./pages/ProductDetail/ProductDetailFactory";
 import { ProductListFactory } from "./pages/ProductList/ProductListFactory";
 
 const router = createBrowserRouter([
@@ -13,8 +13,8 @@ const router = createBrowserRouter([
                 element: ProductListFactory.create(),
             },
             {
-                path: "/post/:id",
-                element: <ProductDetail />,
+                path: "/:id",
+                element: ProductDetailFactory.create()
             },
         ],
     },

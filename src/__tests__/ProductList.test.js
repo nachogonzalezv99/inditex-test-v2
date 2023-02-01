@@ -1,12 +1,12 @@
 import { screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import { LocalStorageProductRepository } from "../infrastructure/LocalStorageProductRepository";
+import { ApiProductRepository } from "../infrastructure/ApiProductRepository";
 import { ProductList } from "../pages/ProductList/ProductList";
 import { ProductMother } from "../test/ProductMother";
 import { renderWithRouter } from "../test/renderWithRouter";
 
-jest.mock("../infrastructure/LocalStorageProductRepository");
-let mockProductRepository = new LocalStorageProductRepository();
+jest.mock("../infrastructure/ApiProductRepository");
+let mockProductRepository = new ApiProductRepository();
 
 describe("ProductList section", () => {
   it("show all cards", async () => {
