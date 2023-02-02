@@ -4,7 +4,7 @@ import styles from "./ProductCard.module.scss";
 export function ProductCard({ product }) {
     return (
         <Link to={`/${product.id}`} className={styles.product}>
-            <img className={styles.product__img} src={product.img} />
+            <img className={styles.product__img} src={product.img} alt={`${product.model}`} />
             <div className={styles.product__info}>
                 <h3>{product.model}</h3>
                 <p>{product.brand}</p>

@@ -4,6 +4,7 @@ import { ApiProductRepository } from "../infrastructure/ApiProductRepository";
 import { ApiShoppingCartRepository } from "../infrastructure/ApiShoppingCartRepository";
 import { ProductDetail } from "../pages/ProductDetail/ProductDetail";
 import { ProductMother } from "./ProductMother";
+import { renderWithRouter } from "../test/renderWithRouter";
 
 jest.mock("../infrastructure/ApiProductRepository");
 jest.mock("../infrastructure/ApiShoppingCartRepository");
@@ -16,7 +17,7 @@ describe("ProductDetail section", () => {
 
     mockProductRepository.byId.mockResolvedValue(product);
 
-    render(
+    renderWithRouter(
       <ProductDetail
         productRepository={mockProductRepository}
         shoppingCartRepository={mockShoppingCartRepository}
@@ -35,7 +36,7 @@ describe("ProductDetail section", () => {
 
     mockProductRepository.byId.mockResolvedValue(product);
 
-    render(
+    renderWithRouter(
       <ProductDetail
         productRepository={mockProductRepository}
         shoppingCartRepository={mockShoppingCartRepository}
@@ -47,12 +48,12 @@ describe("ProductDetail section", () => {
     expect(selectedOption).toBeInTheDocument();
     mockProductRepository.search.mockReset();
   });
-  it("don't show default color if multiple options", async () => {
+  it("don't show defaulwt color if multiple options", async () => {
     const product = ProductMother.create({ colors: ["#fff", "#aaa"] });
 
     mockProductRepository.byId.mockResolvedValue(product);
 
-    render(
+    renderWithRouter(
       <ProductDetail
         productRepository={mockProductRepository}
         shoppingCartRepository={mockShoppingCartRepository}
@@ -71,7 +72,7 @@ describe("ProductDetail section", () => {
 
     mockProductRepository.byId.mockResolvedValue(product);
 
-    render(
+    renderWithRouter(
       <ProductDetail
         productRepository={mockProductRepository}
         shoppingCartRepository={mockShoppingCartRepository}
@@ -95,7 +96,7 @@ describe("ProductDetail section", () => {
 
     mockProductRepository.byId.mockResolvedValue(product);
 
-    render(
+    renderWithRouter(
       <ProductDetail
         productRepository={mockProductRepository}
         shoppingCartRepository={mockShoppingCartRepository}
@@ -119,7 +120,7 @@ describe("ProductDetail section", () => {
 
     mockProductRepository.byId.mockResolvedValue(product);
 
-    render(
+    renderWithRouter(
       <ProductDetail
         productRepository={mockProductRepository}
         shoppingCartRepository={mockShoppingCartRepository}

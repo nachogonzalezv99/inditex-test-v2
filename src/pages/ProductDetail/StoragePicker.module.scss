@@ -1,0 +1,22 @@
+.storage {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+
+  &__item {
+    padding: 20px;
+    border-radius: 6px;
+    border: 1px solid var(--clr-border-light);
+    background-color: var(--white);
+    cursor: pointer;
+    transition: ease 0.3s border-color;
+
+    &__selected {
+      border-color: var(--primary-500) !important;
+    }
+
+    &:hover {
+      border-color: var(--clr-border);
+    }
+  }
+}

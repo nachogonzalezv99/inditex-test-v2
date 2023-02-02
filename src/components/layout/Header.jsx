@@ -10,7 +10,9 @@ const Header = () => {
         <header className={styles.header}>
             <div className={`${styles.header__container} container`}>
                 <div className={styles.header__main}>
-                    <Link to={PublicRoutes.PRODUCT_LIST} className={styles.header__title}><img src="./imgs/logo.webp" /></Link>
+                    <Link to={PublicRoutes.PRODUCT_LIST} className={styles.header__title}>
+                        <img src="./imgs/logo.png" alt="logo" />
+                    </Link>
                     <Breadcrumbs />
                 </div>
 

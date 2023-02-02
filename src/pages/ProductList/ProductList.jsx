@@ -1,6 +1,5 @@
 import { Search } from "../../components/Search/Search";
 import { useSearch } from "../../components/Search/useSearch";
-import { ProductMother } from "../../test/ProductMother";
 import { ProductCard } from "./ProductCard";
 import { ProductCardsSkeleton } from "./ProductCardsSkeleton";
 import styles from './ProductList.module.scss';

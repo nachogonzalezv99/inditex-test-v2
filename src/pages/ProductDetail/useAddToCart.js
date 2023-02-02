@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { DomainEvents } from "../../domain/DomainEvents";
 
 export function useAddToCart(shoppingCartRepository, data) {

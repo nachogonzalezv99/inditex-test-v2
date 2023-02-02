@@ -12,6 +12,7 @@ export function useProducts(productRepository, filter) {
       ) {
         return product;
       }
+      return false;
     });
   }, [products, filter]);
 
@@ -21,7 +22,7 @@ export function useProducts(productRepository, filter) {
       setProducts(products);
       setIsLoading(false);
     });
-  }, []);
+  }, [productRepository]);
 
   return { products: filteredProducts, isLoading };
 }

@@ -1,12 +1,17 @@
-import { useParams } from 'react-router-dom'
+import { useParams, Link } from 'react-router-dom'
 import Accordion from './Accordion'
 import styles from './ProductDetail.module.scss'
 import { useProductDetail } from './useProductDetail'
 import { useAddToCart } from "./useAddToCart"
+import { TbArrowBackUp } from "react-icons/tb"
+import { PublicRoutes } from '../../routes/routes'
+import { ColorPicker } from './ColorPicker'
+import { StoragePicker } from './StoragePicker'
+import { Button } from '../../components/Button/Button'
 
 export function ProductDetail({ productRepository, shoppingCartRepository }) {
-
     const { id: productId } = useParams()
+
     const { product,
         isColorSelected,
         handleColorClick,
@@ -23,69 +28,42 @@ export function ProductDetail({ productRepository, shoppingCartRepository }) {
 
     return (
         <div className={`${styles.productDetail} container section`}>
-            <div>
-                <img src={product.img} className={styles.productDetail__img} />
+            <div className={styles.productDetail__imgContainer}>
+                <Link to={PublicRoutes.PRODUCT_LIST}>
+                    <TbArrowBackUp className={styles.productDetail__backIcon} />
+                </Link>
+                <img src={product.img} className={styles.productDetail__img} alt={product.model} />
             </div>
             <div>
-
                 <div className={styles.productDetail__section}>
                     <h2>{product.model}</h2>
                     <h3 className={styles.productDetail__marca}>{product.brand}</h3>
                 </div>
-
                 <div className={styles.productDetail__section}>
                     <p>{product.price} €</p>
                 </div>
-
                 <div className={styles.productDetail__section}>
                     <h4>Color</h4>
-                    <div className={styles.colors}>
-
-
-
-                        {product?.colors?.map((color, index) => (
-                            <button
-                                key={index}
-                                {...(isColorSelected(color) && { "data-testid": "selected-color" })}
-                                className={`${styles.colors__item} ${isColorSelected(color) && styles.colors__item__selected}`}
-                                style={{ backgroundColor: `#${color}` }}
-                                onClick={() => handleColorClick(color)} />
-                        ))}
-                    </div>
-
+                    <ColorPicker
+                        product={product}
+                        isColorSelected={isColorSelected}
+                        handleColorClick={handleColorClick}
+                    />
                 </div>
-
                 <div className={styles.productDetail__section}>
-
                     <h4>Storage</h4>
-                    <div className={styles.storage}>
-
-                        {product?.storage?.map((storage, index) => (
-                            <button
-                                key={index}
-                                className={`${styles.storage__item} ${isStorageSelected(storage) && styles.storage__item__selected}`}
-                                onClick={() => handleStorageClick(storage)}
-                            >
-                                {storage} GHz
-                            </button>
-                        ))}
-                    </div>
+                    <StoragePicker
+                        product={product}
+                        isStorageSelected={isStorageSelected}
+                        handleStorageClick={handleStorageClick}
+                    />
                 </div>
-
                 <div className={styles.productDetail__section}>
-                    <button
-                        className='btn btn--primary'
-                        {...(isButtonDisabled() && { disabled: true })}
-                        {...(isButtonDisabled() && { "aria-disabled": "true" })}
-                        onClick={save}
-                    >
+                    <Button isButtonDisabled={isButtonDisabled} onClick={save} >
                         Add to cart
-                    </button>
+                    </Button>
                 </div>
-
-
                 <Accordion title="Technical information" product={product} />
-
             </div>
         </div>
     )

@@ -19,6 +19,9 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
+    "cy:open": "cypress open",
+    "cy:run": "cypress run",
+    "test:coverage": "react-scripts test --coverage",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
@@ -40,6 +43,8 @@
     ]
   },
   "devDependencies": {
-    "@faker-js/faker": "^7.6.0"
+    "@faker-js/faker": "^7.6.0",
+    "@testing-library/cypress": "^9.0.0",
+    "cypress": "^12.5.1"
   }
 }
