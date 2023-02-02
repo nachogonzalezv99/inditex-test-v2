@@ -43,7 +43,7 @@ Patrones:
 
 - Styles: Estilos globales (container, btn, ...). Los estilos particulares de cada componente están en su respectivo archivo a la altura del componente.
 
-- Test: Todos los test y utilidades de los mismos. Aquí se encuentran los Object Mother y los custom render, para poder añadir el Provider del Router en los test que lo requieran.
+- Test: Todos los test y utilidades de los mismos. Aquí se encuentran los Object Mother y los custom render, para poder añadir el Provider del Router en los test que lo requieran. En la carpeta e2e están situados los test end to end o de aceptación.
 
 - Utils: funciones y utilidades. Disponemos de la utilidad localStorage, que podrá ser compartida por toda la aplicación.
 

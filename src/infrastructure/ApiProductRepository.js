@@ -43,7 +43,10 @@ export class ApiProductRepository {
 
   async byId(id) {
     return fetch(this.baseUrl + id)
-      .then((response) => response.json())
+      .then((response) => {
+        if (response.status !== 200) throw new Error();
+        return response.json();
+      })
       .then((response) => {
         return {
           id: response.id,

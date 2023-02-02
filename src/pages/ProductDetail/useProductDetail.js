@@ -1,38 +1,50 @@
-import { useEffect, useState } from "react";
+import { useEffect, useReducer } from "react";
 import { useNavigate } from "react-router-dom";
 import { PublicRoutes } from "../../routes/routes";
+import { ACTIONS, reducer } from "./productDetailReducer";
 
 export const useProductDetail = (productRepository, productId) => {
+  const [state, dispatch] = useReducer(reducer, {
+    product: {},
+    selectedColor: "",
+    selectedStorage: "",
+  });
+
   const navigate = useNavigate();
-  const [product, setProduct] = useState({});
-  const [selectedColor, setSelectedColor] = useState("");
-  const [selectedStorage, setSelectedStorage] = useState("");
 
   const setInitialState = (array) => (array?.length === 1 ? array[0] : "");
-  const isColorSelected = (color) => color === selectedColor;
-  const isStorageSelected = (storage) => storage === selectedStorage;
-  const handleColorClick = (color) => setSelectedColor(color);
-  const handleStorageClick = (storage) => setSelectedStorage(storage);
+  const isColorSelected = (color) => color === state.selectedColor;
+  const isStorageSelected = (storage) => storage === state.selectedStorage;
+  const handleColorClick = (color) =>
+    dispatch({ type: ACTIONS.SET_SELECTED_COLOR, payload: color });
+  const handleStorageClick = (storage) =>
+    dispatch({ type: ACTIONS.SET_SELECTED_STORAGE, payload: storage });
 
   useEffect(() => {
     productRepository
       .byId(productId)
-      .then((product) => setProduct(product))
+      .then((product) =>
+        dispatch({ type: ACTIONS.SET_PRODUCT, payload: product })
+      )
       .catch(() => navigate(PublicRoutes.ERROR));
   }, [productRepository, navigate, productId]);
 
   useEffect(() => {
-    setSelectedColor(setInitialState(product.colors));
-    setSelectedStorage(setInitialState(product.storage));
-  }, [product]);
+    dispatch({
+      type: ACTIONS.SET_SELECTED_COLOR,
+      payload: setInitialState(state.product.colors),
+    });
+    dispatch({
+      type: ACTIONS.SET_SELECTED_STORAGE,
+      payload: setInitialState(state.product.storage),
+    });
+  }, [state.product]);
 
   return {
-    product,
+    state,
     isColorSelected,
     handleColorClick,
     isStorageSelected,
     handleStorageClick,
-    selectedColor,
-    selectedStorage,
   };
 };
