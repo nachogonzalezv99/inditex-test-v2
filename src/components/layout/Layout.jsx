@@ -1,13 +1,13 @@
 import { Link, Outlet } from "react-router-dom";
+import { ApiShoppingCartRepository } from "../../infrastructure/ApiShoppingCartRepository";
+import { ShoppingCart } from "../ShoppingCart/ShoppingCart";
+import { Header } from "./Header";
 import styles from "./Layout.module.scss";
 
 export function Layout() {
     return (
         <>
-            <header className={styles.header}>
-                <Link to="/">Main </Link>
-                <h1>Header</h1>
-            </header>
+            <Header />
             <Outlet />
         </>
     );

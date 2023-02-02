@@ -1,8 +1,10 @@
 import { useEffect, useState } from "react";
 
-export const useProductDetail = (productRepository, productId) => {
-  const [isLoading, setIsLoading] = useState(true);
-  const [isSendLoading, setIsSendLoading] = useState(false);
+export const useProductDetail = (
+  productRepository,
+  shoppingCartRepository,
+  productId
+) => {
   const [product, setProduct] = useState({});
   const [selectedColor, setSelectedColor] = useState("");
   const [selectedStorage, setSelectedStorage] = useState("");
@@ -13,15 +15,9 @@ export const useProductDetail = (productRepository, productId) => {
   const handleColorClick = (color) => setSelectedColor(color);
   const handleStorageClick = (storage) => setSelectedStorage(storage);
 
-  const isButtonDisabled = () =>
-    !selectedColor || !selectedStorage || isSendLoading;
-  const handleClick = () => {};
-
   useEffect(() => {
-    setIsLoading(true);
     productRepository.byId(productId).then((product) => {
       setProduct(product);
-      setIsLoading(false);
     });
   }, []);
 
@@ -32,13 +28,11 @@ export const useProductDetail = (productRepository, productId) => {
 
   return {
     product,
-    isLoading,
     isColorSelected,
-    selectedColor,
     handleColorClick,
     isStorageSelected,
     handleStorageClick,
-    isButtonDisabled,
-    handleClick,
+    selectedColor,
+    selectedStorage,
   };
 };

@@ -2,21 +2,24 @@ import { useParams } from 'react-router-dom'
 import Accordion from './Accordion'
 import styles from './ProductDetail.module.scss'
 import { useProductDetail } from './useProductDetail'
+import { useAddToCart } from "./useAddToCart"
 
-
-export function ProductDetail({ productRepository }) {
+export function ProductDetail({ productRepository, shoppingCartRepository }) {
 
     const { id: productId } = useParams()
     const { product,
-        isLoading,
         isColorSelected,
-        selectedColor,
         handleColorClick,
         isStorageSelected,
         handleStorageClick,
-        isButtonDisabled,
-        handleClick
-    } = useProductDetail(productRepository, productId)
+        selectedColor,
+        selectedStorage
+    } = useProductDetail(productRepository, shoppingCartRepository, productId)
+
+    const { save, isButtonDisabled } = useAddToCart(
+        shoppingCartRepository,
+        { productId, selectedColor, selectedStorage }
+    )
 
     return (
         <div className={`${styles.productDetail} container section`}>
@@ -39,27 +42,11 @@ export function ProductDetail({ productRepository }) {
                     <div className={styles.colors}>
 
                         {product?.colors?.map((color, index) => (
-                            <>
-                                <label htmlFor={color} style={{ backgroundColor: `#${color}` }}
-                                    className={`${styles.colors__label} ${isColorSelected(color) && styles.colors__label__selected}`}></label>
-                                <input
-                                    type="radio"
-                                    defaultChecked={selectedColor === color ? true : false}
-                                    data-testid="select-option"
-                                    id={color}
-
-                                    name="colors"
-                                    key={index}
-                                    value={color}
-                                    className={styles.colors__input}
-                                    onChange={() => handleColorClick(color)}
-                                />
-                                {/* <button
-                                    key={index}
-                                    className={`${styles.colors__item} ${isColorSelected(color) && styles.colors__item__selected}`}
-                                    style={{ backgroundColor: `#${color}` }}
-                                    onClick={() => handleColorClick(color)} /> */}
-                            </>
+                            <button
+                                key={index}
+                                className={`${styles.colors__item} ${isColorSelected(color) && styles.colors__item__selected}`}
+                                style={{ backgroundColor: `#${color}` }}
+                                onClick={() => handleColorClick(color)} />
                         ))}
                     </div>
 
@@ -86,8 +73,9 @@ export function ProductDetail({ productRepository }) {
                     <button
                         className='btn btn--primary'
                         disabled={isButtonDisabled()}
-                        onClick={handleClick}
-                    >Añadir
+                        onClick={save}
+                    >
+                        Añadir
                     </button>
                 </div>
 

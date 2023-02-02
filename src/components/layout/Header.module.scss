@@ -1,0 +1,21 @@
+.header {
+  background-color: var(--clr-bg);
+
+  &__container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 60px;
+  }
+
+  &__main {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 50px;
+  }
+
+  &__title {
+    width: 80px;
+  }
+}
