@@ -14,11 +14,11 @@ export function ProductDetail({ productRepository, shoppingCartRepository }) {
         handleStorageClick,
         selectedColor,
         selectedStorage
-    } = useProductDetail(productRepository, shoppingCartRepository, productId)
+    } = useProductDetail(productRepository, productId)
 
     const { save, isButtonDisabled } = useAddToCart(
         shoppingCartRepository,
-        { productId, selectedColor, selectedStorage }
+        { productId: product.id, selectedColor, selectedStorage }
     )
 
     return (
@@ -41,9 +41,12 @@ export function ProductDetail({ productRepository, shoppingCartRepository }) {
                     <h4>Color</h4>
                     <div className={styles.colors}>
 
+
+
                         {product?.colors?.map((color, index) => (
                             <button
                                 key={index}
+                                {...(isColorSelected(color) && { "data-testid": "selected-color" })}
                                 className={`${styles.colors__item} ${isColorSelected(color) && styles.colors__item__selected}`}
                                 style={{ backgroundColor: `#${color}` }}
                                 onClick={() => handleColorClick(color)} />
@@ -72,15 +75,16 @@ export function ProductDetail({ productRepository, shoppingCartRepository }) {
                 <div className={styles.productDetail__section}>
                     <button
                         className='btn btn--primary'
-                        disabled={isButtonDisabled()}
+                        {...(isButtonDisabled() && { disabled: true })}
+                        {...(isButtonDisabled() && { "aria-disabled": "true" })}
                         onClick={save}
                     >
-                        Añadir
+                        Add to cart
                     </button>
                 </div>
 
 
-                <Accordion dion title="Technical information" product={product} />
+                <Accordion title="Technical information" product={product} />
 
             </div>
         </div>

@@ -14,16 +14,8 @@
       "camaras": "4 HD",
       "dimensiones": "10cm x 5cm",
       "peso": 1,
-      "colores": [
-        "D9D9D9",
-        "5A5B7D",
-        "81D6CB",
-        "FFFFFF",
-        "000000"
-      ],
-      "almacenamiento": [
-        "64"
-      ]
+      "colores": ["D9D9D9", "5A5B7D", "81D6CB", "FFFFFF", "000000"],
+      "almacenamiento": ["64"]
     },
     {
       "id": 2,
@@ -39,14 +31,25 @@
       "camaras": "2 Full HD",
       "dimensiones": "12cm x 3cm",
       "peso": 2,
-      "colores": [
-        "81D6CB"
-      ],
-      "almacenamiento": [
-        "64",
-        "124",
-        "256"
-      ]
+      "colores": ["81D6CB"],
+      "almacenamiento": ["64", "124", "256"]
+    },
+    {
+      "id": 3,
+      "img": "./imgs/img1.webp",
+      "marca": "Xiaomi",
+      "modelo": "Xiaomi III",
+      "precio": 190,
+      "cpu": 200,
+      "ram": 250,
+      "sistemaOperativo": "Linux",
+      "resolucionPantalla": "1400x1300",
+      "bateria": "12h",
+      "camaras": "2 Full HD",
+      "dimensiones": "12cm x 3cm",
+      "peso": 2,
+      "colores": ["81D6CB"],
+      "almacenamiento": ["64"]
     }
   ],
   "cart": {}

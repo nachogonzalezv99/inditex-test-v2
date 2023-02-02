@@ -2,8 +2,7 @@ export const setLocalStorage = (key, value, ttl) => {
   const now = new Date();
   const item = {
     value: value,
-    expiry: now.getTime() + ttl * 1000,
-    /*  expiry: now.getTime() + ttl * 60 * 60 * 1000, */
+    expiry: now.getTime() + ttl * 60 * 60 * 1000,
   };
   localStorage.setItem(key, JSON.stringify(item));
 };

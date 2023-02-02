@@ -10,7 +10,6 @@ export function ShoppingCartContextProvider({ children, shoppingCartRepository }
 
     useEffect(() => {
         shoppingCartRepository.search().then((totalItems) => {
-            console.log(totalItems)
             setShoppingCartTotalItems(totalItems);
         });
     }, [shoppingCartRepository]);

@@ -3,6 +3,7 @@ import { getLocalStorage, setLocalStorage } from "../utils/localStorage";
 export class ApiShoppingCartRepository {
   baseUrl = "http://localhost:3500/cart";
   localStorageKey = "shoppingCart";
+  cachedHour = 1;
 
   async search() {
     const data = getLocalStorage(this.localStorageKey);
@@ -10,10 +11,13 @@ export class ApiShoppingCartRepository {
     if (!data) {
       return fetch(this.baseUrl)
         .then((res) => res.json())
-        .then((data) => data.total);
+        .then((data) => {
+          setLocalStorage(this.localStorageKey, data.total, this.cachedHour);
+          return data.total;
+        });
     }
 
-    return Promise.resolve(JSON.parse(data));
+    return Promise.resolve(data);
   }
 
   async save(data) {
@@ -23,6 +27,6 @@ export class ApiShoppingCartRepository {
     });
     const { total } = await response.json();
 
-    setLocalStorage(this.localStorageKey, total, 30);
+    setLocalStorage(this.localStorageKey, total, this.cachedHour);
   }
 }

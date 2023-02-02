@@ -1,10 +1,6 @@
 import { useEffect, useState } from "react";
 
-export const useProductDetail = (
-  productRepository,
-  shoppingCartRepository,
-  productId
-) => {
+export const useProductDetail = (productRepository, productId) => {
   const [product, setProduct] = useState({});
   const [selectedColor, setSelectedColor] = useState("");
   const [selectedStorage, setSelectedStorage] = useState("");
